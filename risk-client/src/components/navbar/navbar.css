@@ -1,0 +1,4 @@
+﻿.nav__playerbank{
+    display: flex;
+    flex-direction: column;
+}

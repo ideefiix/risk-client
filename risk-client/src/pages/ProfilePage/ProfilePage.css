@@ -1,0 +1,9 @@
+﻿.profilePage__colorBox{
+    display: block;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: var(--black);
+    border-width: 2px;
+    border-style: solid;
+}

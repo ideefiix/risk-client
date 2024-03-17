@@ -1,0 +1,43 @@
+﻿.loginPage__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+}
+
+.loginPage__form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.loginPage__registerText {
+    font-size: 12px;
+    font-weight: lighter;
+    text-decoration: underline;
+    color: var(--disabled_darker);
+}
+
+.loginPage__registerText:hover {
+    cursor: pointer;
+}
+
+.errorText{
+    color: var(--warning-color);
+}

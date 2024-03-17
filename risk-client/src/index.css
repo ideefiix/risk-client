@@ -1,0 +1,82 @@
+body {
+  background-color: #F5F5F5 !important;
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  color: var(--black);
+  background-color: #F5F5F5;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --green: #C8E9A0;
+  --green_darker: #68a025;
+  --green_darkest: #345012;
+  --blue: #6DD3CE;
+  --orange: #F7A278;
+  --cerise: #A13D63;
+  --cerise_darker: #81314f;
+  --cerise_darkest: #61253b;
+  --black: #351E29;
+  --white: #F5F5F5;
+  --grey: #c4c4c4;
+  --disabled: #EBEBE4;
+  --disabled_darker: #858563;
+  --warning-color: #F2370C;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.small-text{
+  font-size: 12px;
+}
+.button__green{
+  background-color: var(--green);
+  padding: 8px 16px;
+  border-radius: 5px;
+  border-width: 0;
+  color: var(--white);
+}
+
+.button__green:hover{
+  background-color: var(--green_darker);
+}
+
+.button__green:active{
+  background-color: var(--green_darkest);
+}
+
+.button__green:disabled{
+  background-color: var(--grey);
+}
+
+.button__cerise{
+  background-color: var(--cerise);
+  padding: 8px 16px;
+  border-radius: 5px;
+  border-width: 0;
+  color: var(--white);
+}
+
+.button__cerise:hover{
+  background-color: var(--cerise_darker);
+}
+
+.button__cerise:active{
+  background-color: var(--cerise_darkest);
+}
+
+.button__cerise:disabled{
+  background-color: var(--grey);
+}

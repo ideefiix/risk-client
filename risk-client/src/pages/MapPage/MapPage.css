@@ -1,0 +1,13 @@
+﻿.countryInfoBox__container{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 200px;
+    height:100px;
+    padding: 8px;
+    background-color: #F5F5F5;
+}
+
+.countryInfoBox__leftCol{
+    align-items: start;
+}

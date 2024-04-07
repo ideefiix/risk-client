@@ -4,9 +4,10 @@ import {useAuth} from "../../auth/AuthProvider.jsx";
 import "./LoginPage.css"
 import {Button, Image} from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
-import riskImage from "../../assets/Risk_logo.png" 
+import riskImage from "../../assets/Risk_logo.png"
+import {createTokenFromApi} from "./login-api.js";
 
-const LoginPage = ({loadPlayer}) => {
+const LoginPage = ({loginPlayer}) => {
     const navigate = useNavigate()
     const auth = useAuth()
     const [username, setUsername] = useState('');
@@ -28,35 +29,37 @@ const LoginPage = ({loadPlayer}) => {
 
         setLoading(true)
 
-        /*login(username, password)
-            .then(res => {
-                localStorage.setItem("AUTH_TOKEN", res.data);
-
-                const {id} = jwtDecode(res.data)
-                loadPlayer(id)
-            }, rej => {
-                setErrorText(rej.response.data)
-                setLoading(false)
-            })*/
+        createTokenFromApi({
+            username: username,
+            password: password
+        }).then(res => {
+            console.log("Success", res)
+            localStorage.setItem("AUTH_TOKEN", res.data);
+            loginPlayer()
+        }, rej => {
+            console.log("Fail", rej)
+            setLoading(false)
+            setErrorText(rej.response.data)
+        })
     }
-    
-    async function handleRegister(){
+
+    async function handleRegister() {
         setLoading(true)
         setTimeout(() => {
             auth.setIdHandler("123")
-            return <Navigate to="/map" />
+            return <Navigate to="/map"/>
         }, 1000)
     }
 
-    if(auth.userId) return <Navigate to="/map" />
+    if (auth.userId) return <Navigate to="/map"/>
 
     return (
         <div className={"mt-4"}>
-            <Image src={riskImage} width="100%" />
+            <Image src={riskImage} width="100%"/>
             <div className="loginPage__container">
                 {
                     newAccount &&
-                    <form className="loginPage__form" >
+                    <form className="loginPage__form">
                         <div>
                             <label htmlFor="username">New username:</label>
                             <input type="text" id="username" value={username} onChange={handleUsernameChange}/>
@@ -65,8 +68,9 @@ const LoginPage = ({loadPlayer}) => {
                             <label htmlFor="password">New password:</label>
                             <input type="password" id="password" value={password} onChange={handlePasswordChange}/>
                         </div>
-                        {errorText && <p className="errorText">{errorText}</p>}
-                        <p className={"small-text mt-1 mb-1"} style={{color: "var(--disabled_darker)"}}>TIP: {passwordTips[selectedPasswordIndex.current]} </p>
+                        {errorText && <p className="errorText mb-0">{errorText}</p>}
+                        <p className={"small-text mt-1 mb-1"}
+                           style={{color: "var(--disabled_darker)"}}>TIP: {passwordTips[selectedPasswordIndex.current]} </p>
                         {loading ?
                             <Button style={{width: "100px", marginTop: "8px"}} disabled>
                                 <Spinner
@@ -79,7 +83,8 @@ const LoginPage = ({loadPlayer}) => {
                                 Loading...
                             </Button>
                             :
-                            <Button onClick={handleRegister} style={{width: "100px", marginTop: "8px"}}>Register</Button>
+                            <Button onClick={handleRegister}
+                                    style={{width: "100px", marginTop: "8px"}}>Register</Button>
                         }
                     </form>
                 }
@@ -94,7 +99,7 @@ const LoginPage = ({loadPlayer}) => {
                             <label htmlFor="password">Password:</label>
                             <input type="password" id="password" value={password} onChange={handlePasswordChange}/>
                         </div>
-                        {errorText && <p className="errorText">{errorText}</p>}
+                        {errorText && <p className="errorText mb-0">{errorText}</p>}
                         {loading ?
                             <Button style={{width: "100px", marginTop: "8px"}} disabled>
                                 <Spinner
@@ -109,7 +114,8 @@ const LoginPage = ({loadPlayer}) => {
                             :
                             <Button onClick={handleLogin} style={{width: "100px", marginTop: "8px"}}>Login</Button>
                         }
-                        <p onClick={() => setNewAccount(true)} className="loginPage__registerText mt-2 mb-0">No account? Register
+                        <p onClick={() => setNewAccount(true)} className="loginPage__registerText mt-2 mb-0">No account?
+                            Register
                             here</p>
                     </form>
                 }

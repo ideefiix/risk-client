@@ -10,12 +10,7 @@ const MapPage = ({carte}) => {
         if (countryId === null) {
             setSelectedCountry(null)
         }else{
-            //TODO: Find country in carte dictionary
-            setSelectedCountry({
-                "owner": "Svindlarn",
-                "troop": 5000,
-                "timeConquered": "13/3 18:53"
-            })
+            setSelectedCountry(carte.find(country => country.id === countryId))
         }
     }
 

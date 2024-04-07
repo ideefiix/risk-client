@@ -4,7 +4,7 @@ import {Col, Row} from "react-bootstrap";
 const CountryInfoBox = ({country}) => {
     return (
         <div className={"countryInfoBox__container"}>
-            <h5 className={"text-center"}>{country.owner}</h5>
+            <h5 className={"text-center"}>{country.ownername ? country.ownername : "Barbarians"}</h5>
 
             <Row>
                 <Col xs={"auto"} className={"countryInfoBox__leftCol"}>
@@ -12,8 +12,8 @@ const CountryInfoBox = ({country}) => {
                     <p className={"mb-0"}>Conquered:</p>
                 </Col>
                 <Col className={"ps-0"}>
-                    <p className={"mb-0"}>{country.troop}</p>
-                    <p className={"mb-0"}>{country.timeConquered}</p>
+                    <p className={"mb-0"}>{country.troops}</p>
+                    <p className={"mb-0"}>{country.timeConquered ? country.timeConquered : "never"}</p>
                 </Col>
 
             </Row>

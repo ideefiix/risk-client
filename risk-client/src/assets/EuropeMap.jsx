@@ -15,10 +15,20 @@ const EuropeMap = ({carte, setSelectedCountry}) => {
         carte.forEach(({id, color}) => {
             const pathElement = document.getElementById(id);
             if (pathElement) {
-                console.log("Got element. Start filling...")
                 pathElement.style.fill = color;
             }
         })
+        colorRussiaAndTurkiye()
+    }
+    
+    function colorRussiaAndTurkiye(){
+        const turkiye = document.getElementById("tr");
+        document.getElementById("tr europe").style.fill = turkiye.style.fill;
+        document.getElementById("tr asia").style.fill = turkiye.style.fill;
+        
+        const russia = document.getElementById("ru");
+        document.getElementById("ru-kaliningrad").style.fill = russia.style.fill;
+        document.getElementById("ru-main").style.fill = russia.style.fill;
     }
     
     function selectCountry(countryId){

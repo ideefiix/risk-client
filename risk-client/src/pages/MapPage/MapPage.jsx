@@ -2,8 +2,9 @@
 import Spinner from 'react-bootstrap/Spinner';
 import {useEffect, useState} from "react";
 import CountryInfoBox from "./CountryInfoBox.jsx";
+import {Prev} from "react-bootstrap/PageItem";
 
-const MapPage = ({carte}) => {
+const MapPage = ({carte, setCarte, setPlayer}) => {
     const [selectedCountry, setSelectedCountry] = useState(null)
     
     function selectCountryHandler(countryId) {
@@ -13,21 +14,36 @@ const MapPage = ({carte}) => {
             setSelectedCountry(carte.find(country => country.id === countryId))
         }
     }
-
-    /*    useEffect(() => {
-            setSelectedCountry({
-                "owner": "Svindlarn",
-                "troop": 5000,
-                "timeConquered": "13/3 18:53"
-            })
-        }, [])*/
+    
+    function updateCountryHandler(country){
+        //Replace 1 country in the array
+        const updatedArr = carte.map(c => {
+            if(c.id === country.id){
+                return country
+            }else{
+                return c
+            }
+        })
+        setCarte(updatedArr)
+        //Assume that the country updated is selected
+        setSelectedCountry(country)
+    }
+    
+    function removeTroopsHandler(troopsToRemove){
+        setPlayer(prev => {
+            return {
+                ...prev,
+                troops: prev.troops - troopsToRemove
+            }
+        })
+    }
 
     return (
         <div className={"map-container"}>
             {
                 !!carte ?
                     <div className={"position-relative"}>
-                        {selectedCountry && <CountryInfoBox country={selectedCountry}/>}
+                        {selectedCountry && <CountryInfoBox country={selectedCountry} updateCountryHandler={updateCountryHandler} removeTroopsHandler={removeTroopsHandler} />}
                         <EuropeMap className={"europe-map"} carte={carte} setSelectedCountry={selectCountryHandler}/>
                     </div>
                     :

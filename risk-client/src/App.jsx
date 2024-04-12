@@ -108,7 +108,7 @@ function App() {
                             }/>
                             <Route path="/map" element={
                                 <RequireAuth>
-                                    <MapPage carte={carte}/>
+                                    <MapPage carte={carte} setCarte={setCarte} setPlayer={setPlayer}/>
                                 </RequireAuth>
                             }/>
                             <Route path="/shop" element={

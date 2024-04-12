@@ -21,7 +21,11 @@ body {
   --green_darker: #68a025;
   --green_darkest: #345012;
   --blue: #6DD3CE;
+  --blue_darker: #38b8b2; /* 25% */
+  --blue_darkest: #257b77; /* 50% */
   --orange: #F7A278;
+  --orange_darker: #f26621; /* 25% */
+  --orange_darkest: #ad400a; /* 50% */
   --cerise: #A13D63;
   --cerise_darker: #81314f;
   --cerise_darkest: #61253b;
@@ -80,3 +84,4 @@ h1 {
 .button__cerise:disabled{
   background-color: var(--grey);
 }
+

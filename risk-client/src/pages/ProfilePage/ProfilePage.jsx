@@ -2,12 +2,22 @@
 import Spinner from "react-bootstrap/Spinner";
 import "./ProfilePage.css"
 import {Col, Row} from "react-bootstrap";
+import {rollColorFromApi} from "./profile-api.js";
 
 const ProfilePage = ({player, setPlayer}) => {
     
     function rollColor(){
-        
+        rollColorFromApi(player.id).then(res => {
+            setPlayer({
+                ...player,
+                color: res.data.color,
+                rerollsLeft: player.rerollsLeft-1
+            })
+        }, rej => {
+            
+        })
     }
+    
     return (
         <Container className={"pt-2"}>
             {player &&
@@ -17,7 +27,7 @@ const ProfilePage = ({player, setPlayer}) => {
                     <p>Your color:</p>
                     <Row xs={"auto"}>
                         <Col>
-                            <div className={"profilePage__colorBox"} style={{backgroundColor: `#${player.color}`}}></div>
+                            <div className={"profilePage__colorBox"} style={{backgroundColor: `${player.color}`}}></div>
                         </Col>
                         <Col>
                             <button onClick={rollColor} className={"button__cerise"} disabled={player.rerollsLeft < 1}>Reroll</button>

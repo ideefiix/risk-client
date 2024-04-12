@@ -2,14 +2,13 @@ import * as React from "react";
 import {useEffect, useRef} from "react";
 
 const EuropeMap = ({carte, setSelectedCountry}) => {
-    const coloredMap = useRef(false)
+
     // water = #ADD8E6
     useEffect(() => {
-        if(!coloredMap.current){
+        if(carte !== null){
             colorEurope()
-            coloredMap.current = true
         }
-    }, [])
+    }, [carte])
 
     function colorEurope() {
         carte.forEach(({id, color}) => {

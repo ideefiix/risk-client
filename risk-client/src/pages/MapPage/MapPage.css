@@ -1,13 +1,64 @@
-﻿.countryInfoBox__container{
+﻿.countryInfoBox__container {
     position: absolute;
     top: 16px;
     left: 16px;
     width: 200px;
-    height:100px;
+    height: 140px;
     padding: 8px;
     background-color: #F5F5F5;
 }
 
-.countryInfoBox__leftCol{
+.countryInfoBox__leftCol {
     align-items: start;
+}
+
+.countryInfoBox__apiError {
+    position: absolute;
+    bottom: 40px;
+    margin-left: 45px;
+    margin-bottom: 0;
+    font-size: 10px;
+    color: var(--warning-color);
+}
+
+.actionBtn__container {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    justify-content: center;
+}
+
+.actionBtn__reinforce {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    background-color: var(--blue);
+    border-radius: 50px 0 0 50px;
+}
+
+.actionBtn__attack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    background-color: var(--orange);
+    border-radius: 0 50px 50px 0;
+}
+
+.actionBtn__reinforce:hover {
+    box-shadow: 0 0 2px 2px var(--blue_darkest);
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.actionBtn__attack:hover {
+    box-shadow: 0 0 2px 2px var(--orange_darkest);
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.actionBtn__input {
+    width: 75px;
 }

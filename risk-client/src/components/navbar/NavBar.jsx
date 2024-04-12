@@ -28,7 +28,7 @@ const NavBar = ({cash, troops}) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigateTo("/map")}>Map</Nav.Link>
-                        <Nav.Link onClick={() => navigateTo("/shop")}>Shop</Nav.Link>
+                        <Nav.Link onClick={() => navigateTo("/shop")}>Constructiongit </Nav.Link>
                         <Nav.Link onClick={() => navigateTo("/profile")}>Profile</Nav.Link>
                     </Nav>
                     <PlayerBank cash={cash} troops={troops}/>

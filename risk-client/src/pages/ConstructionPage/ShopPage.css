@@ -1,0 +1,4 @@
+.buildingCard__error{
+    color: var(--warning-color);
+    margin-bottom: 0;
+}

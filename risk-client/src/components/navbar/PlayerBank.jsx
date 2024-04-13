@@ -1,6 +1,6 @@
 ﻿import {Col, Row} from "react-bootstrap";
 
-const PlayerBank = ({cash, troops}) => {
+const PlayerBank = ({player}) => {
     return (
         <div className="nav__playerbank">
             <Row>
@@ -14,7 +14,7 @@ const PlayerBank = ({cash, troops}) => {
                             d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"/>
                         <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"/>
                     </svg>
-                    <p className="mb-0 fw-bold">{cash}</p>
+                    <p className="nav__playerText">{player.cash}<span className={"nav_incomeText"}>/{player.cashIncome}</span></p>
                 </Col>
                 <Col className="text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -24,7 +24,7 @@ const PlayerBank = ({cash, troops}) => {
                         <path
                             d="M6.25 11.745v-1.418l1.204 1.375.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215-.494-.494.205-1.843.006-.067 1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z"/>
                     </svg>
-                    <p className="mb-0 fw-bold">{troops}</p>
+                    <p className="nav__playerText">{player.troops}<span className={"nav_incomeText"}>/{player.troopIncome}</span></p>
                 </Col>  
             </Row>
             

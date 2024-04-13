@@ -7,7 +7,7 @@ import {useAuth} from "../../auth/AuthProvider.jsx";
 import Spinner from "react-bootstrap/Spinner";
 import {TimePassedSinceDateTime} from "../../assets/DateParser.js";
 
-const CountryInfoBox = ({country, updateCountryHandler, removeTroopsHandler}) => {
+const CountryInfoBox = ({country, updateCountryHandler, updatePlayerHandler}) => {
     const [apiError, setApiError] = useState("")
     const [apiLoading, setApiLoading] = useState(false)
     const [troops, setTroops] = useState("")
@@ -23,8 +23,8 @@ const CountryInfoBox = ({country, updateCountryHandler, removeTroopsHandler}) =>
 
         attackTerritoryWithApi(dto).then(res => {
             let resCountry = res.data;
+            updatePlayerHandler(country, resCountry, parseInt(troops))
             updateCountryHandler(resCountry)
-            removeTroopsHandler(troops)
         }, rej => {
             setApiError(rej.response.data.title)
         })
@@ -42,14 +42,15 @@ const CountryInfoBox = ({country, updateCountryHandler, removeTroopsHandler}) =>
 
         reinforceTerritoryWithApi(dto).then(res => {
             let resCountry = res.data;
-            console.log("data returned", resCountry)
             updateCountryHandler(resCountry)
             removeTroopsHandler(troops)
         }, rej => {
             setApiError(rej.response.data.title)
+        }).finally(() => {
+            setTroops("")
+            setApiLoading(false)
         })
-        setTroops("")
-        setApiLoading(false)
+       
     }
 
     return (
@@ -63,7 +64,7 @@ const CountryInfoBox = ({country, updateCountryHandler, removeTroopsHandler}) =>
                 </Col>
                 <Col className={"ps-0"}>
                     <p className={"mb-0"}>{country.troops}</p>
-                    <p className={"mb-0"}>{country.timeConquered ? TimePassedSinceDateTime(country.timeConquered) : "never"}</p>
+                    <p className={"mb-0"}>{country.timeConquered ? (TimePassedSinceDateTime(country.timeConquered) ? TimePassedSinceDateTime(country.timeConquered) : "Recently") : "never"}</p>
                 </Col>
             </Row>
             {

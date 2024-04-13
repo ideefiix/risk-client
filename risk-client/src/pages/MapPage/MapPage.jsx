@@ -29,13 +29,26 @@ const MapPage = ({carte, setCarte, setPlayer}) => {
         setSelectedCountry(country)
     }
     
-    function removeTroopsHandler(troopsToRemove){
+    function updatePlayerHandler(oldTerritory, newTerritory, attackingTroops){
+        if(oldTerritory.ownername === newTerritory.ownername){
+            //Attack lost
+            setPlayer(prev => {
+                return {
+                    ...prev,
+                    troops: prev.troops - attackingTroops,
+                    kills: prev.kills + attackingTroops
+                }
+            })
+        }else{
+            //Attack won
         setPlayer(prev => {
             return {
                 ...prev,
-                troops: prev.troops - troopsToRemove
+                troops: prev.troops - attackingTroops,
+                kills: prev.kills + oldTerritory.troops
             }
         })
+        }
     }
 
     return (
@@ -43,7 +56,7 @@ const MapPage = ({carte, setCarte, setPlayer}) => {
             {
                 !!carte ?
                     <div className={"position-relative"}>
-                        {selectedCountry && <CountryInfoBox country={selectedCountry} updateCountryHandler={updateCountryHandler} removeTroopsHandler={removeTroopsHandler} />}
+                        {selectedCountry && <CountryInfoBox country={selectedCountry} updateCountryHandler={updateCountryHandler} updatePlayerHandler={updatePlayerHandler} />}
                         <EuropeMap className={"europe-map"} carte={carte} setSelectedCountry={selectCountryHandler}/>
                     </div>
                     :

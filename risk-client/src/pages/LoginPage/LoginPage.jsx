@@ -5,7 +5,7 @@ import "./LoginPage.css"
 import {Button, Image} from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import riskImage from "../../assets/Risk_logo.png"
-import {createTokenFromApi} from "./login-api.js";
+import {createTokenFromApi, registerPlayerWithApi} from "./login-api.js";
 
 const LoginPage = ({loginPlayer}) => {
     const navigate = useNavigate()
@@ -15,7 +15,7 @@ const LoginPage = ({loginPlayer}) => {
     const [errorText, setErrorText] = useState(null)
     const [loading, setLoading] = useState(false)
     const [newAccount, setNewAccount] = useState(false)
-    const passwordTips = ["Dont use your bank code. Use your friends.", "Dont forget your password.", "There is no going back."]
+    const passwordTips = ["Dont use your bank code. Use your friends.", "Dont forget your password.", "There is no going back from this."]
     const selectedPasswordIndex = useRef(Math.floor(Math.random() * 3))
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -33,11 +33,9 @@ const LoginPage = ({loginPlayer}) => {
             username: username,
             password: password
         }).then(res => {
-            console.log("Success", res)
             localStorage.setItem("AUTH_TOKEN", res.data);
             loginPlayer()
         }, rej => {
-            console.log("Fail", rej)
             setLoading(false)
             setErrorText(rej.response.data)
         })
@@ -45,13 +43,20 @@ const LoginPage = ({loginPlayer}) => {
 
     async function handleRegister() {
         setLoading(true)
-        setTimeout(() => {
-            auth.setIdHandler("123")
-            return <Navigate to="/map"/>
-        }, 1000)
+        const dto = {
+            "username": username,
+            "password": password
+        }
+        registerPlayerWithApi(dto).then(res => {
+            handleLogin()
+        }, rej => {
+            setLoading(false)
+            setErrorText(rej.response.data)
+        })
+            
     }
 
-    if (auth.userId) return <Navigate to="/map"/>
+    if (auth.userId) return <Navigate to="/map"/> //Will redirect when player login.
 
     return (
         <div className={"mt-4"}>

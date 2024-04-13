@@ -5,7 +5,7 @@ import {useNavigate, Routes, Route, Navigate} from "react-router-dom"
 import {Col} from "react-bootstrap";
 import MapPage from "./pages/MapPage/MapPage.jsx";
 import {useEffect, useRef, useState} from "react";
-import ShopPage from "./pages/ShopPage/ShopPage.jsx";
+import ConstructionPage from "./pages/ConstructionPage/ConstructionPage.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import RequireAuth from "./auth/RequireAuth.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
@@ -27,7 +27,6 @@ function App() {
             isMounted.current = true
             loginPlayer().then(() => {
                 setCheckingToken(false)
-                console.log("setting checking token")
             })
         }
     }, [])
@@ -69,10 +68,14 @@ function App() {
     }
 
     async function initPlayer(id) {
-        const res = await fetchPlayerFromAPI(id)
-        console.log("Fetched player", res.data)
+        await fetchPlayerFromAPI(id).then(res => {
+            setPlayer(res.data)
+        }, rej => {
+            localStorage.removeItem('AUTH_TOKEN')
+            isMounted.current = false
+        })
 
-        setPlayer(res.data)
+
         /*{
                 "Id": "123abc",
                 "Username": "Svindlarn",
@@ -88,7 +91,6 @@ function App() {
 
     async function initCarte() {
         const res = await fetchTerritoriesFromAPI()
-        console.log("Fetched map", res.data)
         setCarte(res.data)
     }
 
@@ -96,10 +98,10 @@ function App() {
         <Container className={"app-container"}>
             {
                 checkingToken ?
-                    <Spinner />
+                    <Spinner/>
                     :
                     <Col className={"app__col"}>
-                        {auth.userId && <NavBar cash={player.cash} troops={player.troops}/>}
+                        {player && <NavBar player={player}/>}
                         <Routes>
                             <Route path="/" element={
                                 <RequireAuth>
@@ -113,7 +115,7 @@ function App() {
                             }/>
                             <Route path="/shop" element={
                                 <RequireAuth>
-                                    <ShopPage/>
+                                    <ConstructionPage player={player} setPlayer={setPlayer}/>
                                 </RequireAuth>
                             }/>
                             <Route path="/profile" element={

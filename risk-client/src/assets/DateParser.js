@@ -11,6 +11,6 @@
     let res = ""
     if(days !== 0) res = days.toString() + "d "
     if(hours !== 0) res = res + hours.toString() + "h"
-
+    
     return res
 }

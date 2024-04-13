@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import PlayerBank from "./PlayerBank.jsx";
 import riskLogo from "../../assets/Risk_logo.png"
 
-const NavBar = ({cash, troops}) => {
+const NavBar = ({player}) => {
     const navigate = useNavigate()
 
     function navigateTo(path) {
@@ -28,10 +28,10 @@ const NavBar = ({cash, troops}) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigateTo("/map")}>Map</Nav.Link>
-                        <Nav.Link onClick={() => navigateTo("/shop")}>Constructiongit </Nav.Link>
+                        <Nav.Link onClick={() => navigateTo("/shop")}>Construction</Nav.Link>
                         <Nav.Link onClick={() => navigateTo("/profile")}>Profile</Nav.Link>
                     </Nav>
-                    <PlayerBank cash={cash} troops={troops}/>
+                    <PlayerBank player={player}/>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
